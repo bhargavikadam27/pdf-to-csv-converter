@@ -1,17 +1,13 @@
-import tabula  # simple wrapper for tabula-java, read tables from PDF into csv
+import tabula  
 import os
 print("[-+-] starting pdf_csv.py...")
 print("[-+-] import a pdf and convert it to a csv")
-# -----------------------------------------------------------------------------
+
 print("[-+-] importing required packages for pdf_csv.py...")
-# from modules.defaults import df # local module
+
 print("[-+-] pdf_csv.py packages imported! \n")
-# -----------------------------------------------------------------------------
 
-# -----------------------------------------------------------------------------
-
-
-def pdf_csv():  # convert pdf to csv
+def pdf_csv():  
     print("[-+-] default filenames:")
     filename = "sample1"
     pdf = filename + ".pdf"
@@ -31,7 +27,7 @@ def pdf_csv():  # convert pdf to csv
     print(csv_path + "\n")
 
     print("[-+-] looking for default pdf...")
-    if os.path.exists(pdf_path) == True:  # check if the default pdf exists
+    if os.path.exists(pdf_path) == True: 
         print("[-+-] pdf found: " + pdf + "\n")
         pdf_flag = True
     else:
@@ -40,21 +36,20 @@ def pdf_csv():  # convert pdf to csv
             defaultdir for defaultdir in os.listdir()
             if defaultdir.endswith(".pdf")
         ]
-        if len(arr_pdf) == 1:  # there has to be only 1 pdf in the directory
+        if len(arr_pdf) == 1: 
             print("[-+-] pdf found: " + arr_pdf[0] + "\n")
             pdf_path = os.path.join(defaultdir, arr_pdf[0])
             pdf_flag = True
-        elif len(arr_pdf) > 1:  # there are more than 1 pdf in the directory
+        elif len(arr_pdf) > 1:  
             print("[-+-] more than 1 pdf found, exiting script!")
             pdf_flag = False
-            # TODO add option to select from available pdfs
+           
         else:
             print("[-+-] pdf cannot be found, exiting script!")
             pdf_flag = False
 
     if pdf_flag == True:
-        # check if csv exists at the default file path
-        # if csv does not exist create a blank file at the default path
+        
         try:
             print("[-+-] looking for default csv...")
             open(csv_path, "r")
@@ -65,7 +60,7 @@ def pdf_csv():  # convert pdf to csv
             open(csv_path, "w")
 
         print("[-+-] converting pdf to csv...")
-        #    print("[-+-] pdf to csv conversion suppressed! \n")
+       
         try:
             tabula.convert_into(pdf_path,
                                 csv_path,
@@ -79,9 +74,4 @@ def pdf_csv():  # convert pdf to csv
 
         print("[-+-] finished pdf_csv.py successfully!")
 
-
-# -----------------------------------------------------------------------------
-
-# -----------------------------------------------------------------------------
 pdf_csv()  # run the program
-# -----------------------------------------------------------------------------
